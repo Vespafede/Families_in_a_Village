@@ -9,3 +9,5 @@ Instructions for running the program:
 6. Open the command prompt and navigate to the directory where you saved the file "families.py"
 7. Run the program by typing "python families.py"
 8. Enjoy the result!
+
+If you want to make changes feel free to propose them, post them here on github and then we will check them and decide whether to approve them entirely, partially or reject them
