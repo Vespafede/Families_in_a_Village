@@ -27,7 +27,8 @@ for x in range(families):
 for eachfamily in newborns:
     males += eachfamily.count(1)
     females += eachfamily.count(0)
-    ratio.append(males/females)
+    if females != 0:
+        ratio.append(males/females)
 
 # Print the number of males, of females and the ratio
 print(f"Number of males: {males}")
