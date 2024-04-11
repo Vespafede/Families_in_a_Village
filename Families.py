@@ -5,21 +5,25 @@ Description: In a village, an n number of families have children until a boy com
 import random
 import matplotlib.pyplot as plt
 
-families = 5000000 # Number of families (WARNING: it is recommended not to enter a number greater than about 5 million or the time to run the program could become very long)
+families = 500000 # Number of families (WARNING: it is recommended not to enter a number greater than about 5 million or the time to run the program could become very long)
 family = [] # List of newborns in a family
 newborns = [] # All newborns list
 ratio = [] # List of male/female ratios for families
 males = 0 # Numbers of males
 females = 0 # Numbers of females
 
+def birth():
+  global newborn
+  newborn = random.randint(0,1) # Make a new child (Male = 1, Female = 0)
+  global family
+  family.append(newborn)
+
 # Do the cycle until we reach the number of families
 for x in range(families):
-    newborn = random.randint(0,1) # Male = 1, Female = 0
-    family.append(newborn)
+    birth()
     # Make a new child until one is male
     while newborn != 1:
-        newborn = random.randint(0,1)
-        family.append(newborn)
+        birth()
     newborns.append(family)
     family = []
 
