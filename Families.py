@@ -1,47 +1,57 @@
 '''
-Authors: Federico Grosso, Tommaso Vallone
-Description: In a village, an n number of families have children until a boy comes out
+MIT License
+
+Copyright (c) 2024 Federico Grosso, Tommaso Vallone
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 '''
+
+#Description: In a village, an n number of families have children until a boy comes out
+
 import random
 import matplotlib.pyplot as plt
 
-families = 5000000 # Number of families (WARNING: it is recommended not to enter a number greater than about 5 million or the time to run the program could become very long)
-family = [] # List of newborns in a family
-newborns = [] # All newborns list
-ratio = [] # List of male/female ratios for families
-males = 0 # Numbers of males
-females = 0 # Numbers of females
+families = 5000000  # Number of families
+males = 0  # Count of male children
+females = 0  # Count of female children
+ratio = []  # List of male/female ratios
 
-def birth():
-  newborn = random.randint(0,1) # Make a new child (Male = 1, Female = 0)
-  global family
-  family.append(newborn)
-  return newborn
+# Generate children for each family
+for _ in range(families):
+    while True:
+        newborn = random.randint(0, 1)  # Male = 1, Female = 0
+        if newborn == 1:
+            males += 1
+            break
+        females += 1
 
-# Do the cycle until we reach the number of families
-for x in range(families):
-    # Resetting the newborn variable and the family List
-    newborn = None
-    family = []
-    # Make a new child until one is male
-    while newborn != 1:
-        newborn = birth()
-    newborns.append(family)
+    # Append the male/female ratio at each step (only if there are females to avoid division by zero)
+    if females > 0:
+        ratio.append(males / females)
 
-# Count the number of males and females for each family and calculate the ratio
-for eachfamily in newborns:
-    males += eachfamily.count(1)
-    females += eachfamily.count(0)
-    if females != 0:
-        ratio.append(males/females)
-
-# Print the number of males, of females and the ratio
+# Print the number of males, females, and the final ratio
 print(f"Number of males: {males}")
 print(f"Number of females: {females}")
 print(f"Ratio males/females: {males/females}")
 
-# Create the ratio progression chart
+# Plot the male/female ratio progression
 plt.plot(ratio)
 plt.ylabel('Ratio male/female')
-plt.xlabel('Number of couples')
+plt.xlabel('Number of families')
 plt.show()
